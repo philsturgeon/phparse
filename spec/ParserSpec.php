@@ -12,60 +12,30 @@ describe(Parser::class, function() {
         VCR::eject();
     });
 
-    describe('->detectVersion()', function() {
+    describe('->phpVersion()', function() {
         context('with a nice easy 5.6 instllation', function() {
             beforeEach(function() {
                 $html = file_get_contents('http://localhost:8000/?version=5.6.12');
-                $parse = new Parser($html);
-                $this->version = $parse->detectVersion();
+                $this->parse = new Parser($html);
             });
 
             it("returns '5.6.12' when typecast as string", function() {
-              expect((string) $this->version)->toBe('5.6.12');
+              expect($this->parse->phpVersion())->toBe('5.6.12');
             });
 
-            it("returns major version of int(5)", function() {
-              expect($this->version->getMajor())->toBe(5);
-            });
-
-            it("returns minor version of int(6)", function() {
-              expect($this->version->getMinor())->toBe(6);
-            });
-
-            it("returns patch version of int(12)", function() {
-              expect($this->version->getPatch())->toBe(12);
-            });
-
-            it("returns no pre-release'", function() {
-              expect($this->version->hasPreRelease())->toBe(false);
-            });
-
-            it("returns no build'", function() {
-              expect($this->version->hasBuild())->toBe(false);
+            it("returns '5.6.12' when typecast as string", function() {
+              expect($this->parse->generalInfo())->toBe([]);
             });
         });
 
         context('with some batshit custom host verison', function() {
             beforeEach(function() {
                 $html = file_get_contents('http://php56.hosteurope-infos.de/phpinfo.php');
-                $parse = new Parser($html);
-                $this->version = $parse->detectVersion();
+                $this->parse = new Parser($html);
             });
 
             it("returns '5.6.12' when typecast as string", function() {
-              expect((string) $this->parse->detectVersion())->toBe('5.6.12');
-            });
-
-            it("returns major version of '5'", function() {
-              expect((string) $this->parse->detectVersion()->getMajor())->toBe("5");
-            });
-
-            it("returns major version of '6'", function() {
-              expect((string) $this->parse->detectVersion()->getMajor())->toBe("5");
-            });
-
-            it("returns major version of '12'", function() {
-              expect((string) $this->parse->detectVersion()->getMajor())->toBe("5");
+              expect($this->parse->phpVersion())->toBe('5.6.14-1~he.1');
             });
         });
     });

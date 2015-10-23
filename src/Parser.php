@@ -13,16 +13,22 @@ class Parser
         $this->xpath = $this->loadXPathDocument($html);
     }
 
-    public function detectVersion()
+    public function parse()
     {
-        $node = $this->xpath->query('//body//h1')[0];
-        $versionString = str_replace('PHP Version ', '', $node->nodeValue);
-        return $this->convertToSemver($versionString);
+        return Info($this->phpVersion(), $this->generalInfo());
     }
 
-    private function convertToSemver($versionString)
+    public function phpVersion()
     {
-        return SemVerParser::parse($versionString);
+        $node = $this->xpath->query('//body//h1')[0];
+        return str_replace('PHP Version ', '', $node->nodeValue);
+    }
+    
+    private function generalInfo()
+    {
+        $table = $this->xpath->query('//body//table[2]');
+        $rows = $table->children();
+        return $rows;
     }
 
     private function loadXPathDocument($html)
