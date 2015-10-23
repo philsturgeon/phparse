@@ -1,0 +1,14 @@
+{
+    "require-dev": {
+        "php-vcr/php-vcr": "~1.2",
+        "crysalead/kahlan": "~1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sturgeon\\PHPArse\\": "src"
+        }
+    },
+    "require": {
+        "symfony/dom-crawler": "~2.7"
+    }
+}
