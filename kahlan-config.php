@@ -2,7 +2,7 @@
 use filter\Filter;
 use VCR\VCR;
 
-VCR::configure()->setCassettePath('spec/fixtures');
+VCR::configure()->setCassettePath(__DIR__.'/spec/fixtures');
 VCR::turnOn();
 
 Filter::register('exclude.namespaces', function ($chain) {

@@ -3,7 +3,7 @@
 use Sturgeon\PHPArse\Parser;
 use VCR\VCR;
 
-describe('Parser', function() {
+describe(Parser::class, function() {
     before(function() {
         VCR::insertCassette('phpinfos');
     });
@@ -24,16 +24,24 @@ describe('Parser', function() {
               expect((string) $this->version)->toBe('5.6.12');
             });
 
-            it("returns major version of '5'", function() {
+            it("returns major version of int(5)", function() {
               expect($this->version->getMajor())->toBe(5);
             });
 
-            it("returns major version of '6'", function() {
+            it("returns minor version of int(6)", function() {
               expect($this->version->getMinor())->toBe(6);
             });
 
-            it("returns major version of '12'", function() {
+            it("returns patch version of int(12)", function() {
               expect($this->version->getPatch())->toBe(12);
+            });
+
+            it("returns no pre-release'", function() {
+              expect($this->version->hasPreRelease())->toBe(false);
+            });
+
+            it("returns no build'", function() {
+              expect($this->version->hasBuild())->toBe(false);
             });
         });
 
