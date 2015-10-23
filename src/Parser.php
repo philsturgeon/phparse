@@ -8,6 +8,11 @@ class Parser
 {
     protected $xpath;
 
+    public static function readFromUrl($url)
+    {
+        return new static(file_get_contents($url));
+    }
+
     public function __construct($html)
     {
         $this->xpath = $this->loadXPathDocument($html);

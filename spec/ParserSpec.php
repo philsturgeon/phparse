@@ -13,8 +13,8 @@ describe(Parser::class, function() {
     });
 
     beforeEach(function() {
-        $html = file_get_contents('http://localhost:8000/?version=5.6.12');
-        $this->parse = new Parser($html);
+        $url = 'http://localhost:8000/?version=5.6.12';
+        $this->parse = Parser::readFromUrl($url);
     });
 
     describe('->phpVersion()', function() {
