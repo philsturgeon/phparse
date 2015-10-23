@@ -1,6 +1,5 @@
 <?php namespace Sturgeon\PHPArse;
 
-use Naneau\SemVer\Parser as SemVerParser;
 use DOMDocument;
 use DOMXpath;
 
@@ -20,16 +19,16 @@ class Parser
 
     public function parse()
     {
-        return Info($this->phpVersion(), $this->generalInfo());
+        return new Info($this->locatePhpVersion(), $this->locateGeneralInfo());
     }
 
-    public function phpVersion()
+    public function locatePhpVersion()
     {
         $node = $this->xpath->query('//body//h1')[0];
         return str_replace('PHP Version ', '', $node->nodeValue);
     }
 
-    public function generalInfo()
+    public function locateGeneralInfo()
     {
         $rows = $this->xpath->query('//body//table[2]/tr');
         $infoPairs = [];

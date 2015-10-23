@@ -1,5 +1,6 @@
 <?php
 
+use Sturgeon\PHPArse\Info;
 use Sturgeon\PHPArse\Parser;
 use VCR\VCR;
 
@@ -14,18 +15,24 @@ describe(Parser::class, function() {
 
     beforeEach(function() {
         $url = 'http://localhost:8000/?version=5.6.12';
-        $this->parse = Parser::readFromUrl($url);
+        $this->parser = Parser::readFromUrl($url);
     });
 
-    describe('->phpVersion()', function() {
-        it("returns '5.6.12' when typecast as string", function() {
-          expect($this->parse->phpVersion())->toBe('5.6.12');
+    describe('->parse()', function() {
+        it('returns an instance of info, which is probably correct', function() {
+            expect($this->parser->parse())->toBeAnInstanceOf(Info::class);
         });
     });
 
-    describe('->generalInfo()', function() {
+    describe('->locatePhpVersion()', function() {
+        it("returns '5.6.12'", function() {
+            expect($this->parser->locatePhpVersion())->toBe('5.6.12');
+        });
+    });
+
+    describe('->locateGeneralInfo()', function() {
         it("returns a few key items", function() {
-          $info = $this->parse->generalInfo();
+          $info = $this->parser->locateGeneralInfo();
           expect($info)->toContainKey('Build Date');
           expect($info)->toContainKey('Configure Command');
           expect($info)->toContainKey('Server API');
