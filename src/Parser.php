@@ -23,12 +23,27 @@ class Parser
         $node = $this->xpath->query('//body//h1')[0];
         return str_replace('PHP Version ', '', $node->nodeValue);
     }
-    
-    private function generalInfo()
+
+    public function generalInfo()
     {
-        $table = $this->xpath->query('//body//table[2]');
-        $rows = $table->children();
-        return $rows;
+        $rows = $this->xpath->query('//body//table[2]/tr');
+        $infoPairs = [];
+        foreach ($rows as $row) {
+            $label = $this->cleanLabel($row->firstChild->textContent);
+            $value = $this->cleanValue($row->lastChild->textContent);
+            $infoPairs[$label] = $value;
+        }
+        return $infoPairs;
+    }
+    
+    private function cleanLabel($label)
+    {
+        return trim($label);
+    }
+
+    private function cleanValue($label)
+    {
+        return trim($label);
     }
 
     private function loadXPathDocument($html)
