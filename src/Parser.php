@@ -1,18 +1,34 @@
 <?php namespace Sturgeon\PHPArse;
 
-use Symfony\Component\DomCrawler\Crawler;
+use Naneau\SemVer\Parser as SemVerParser;
+use DOMDocument;
+use DOMXpath;
 
 class Parser
 {
-    protected $crawler;
+    protected $xpath;
 
     public function __construct($html)
     {
-      $this->crawler = new Crawler($html);
+        $this->xpath = $this->loadXPathDocument($html);
     }
-    
+
     public function detectVersion()
     {
-        return str_replace('PHP Version ', '', $this->crawler->filterXPath('//body//h1')->text());
+        $node = $this->xpath->query('//body//h1')[0];
+        $versionString = str_replace('PHP Version ', '', $node->nodeValue);
+        return $this->convertToSemver($versionString);
+    }
+
+    private function convertToSemver($versionString)
+    {
+        return SemVerParser::parse($versionString);
+    }
+
+    private function loadXPathDocument($html)
+    {
+        $document = new DOMDocument;
+        $document->loadHTML($html);
+        return new DOMXpath($document);
     }
 }

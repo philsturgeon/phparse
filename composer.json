@@ -9,6 +9,6 @@
         }
     },
     "require": {
-        "symfony/dom-crawler": "~2.7"
+        "naneau/semver": "0.0.7.*"
     }
 }
