@@ -9,12 +9,16 @@ class Parser
 
     public static function readFromUrl($url)
     {
-        return new static(file_get_contents($url));
+        $html = file_get_contents($url);
+        return new static($html);
     }
 
     public function __construct($html)
     {
         $this->xpath = $this->loadXPathDocument($html);
+        if (! $this->isValidPhpInfoHtml()) {
+            throw new \Exception('The HTML does not contain valid phpinfo() output');
+        }
     }
 
     public function parse()
@@ -39,7 +43,7 @@ class Parser
         }
         return $infoPairs;
     }
-    
+
     private function cleanLabel($label)
     {
         return trim($label);
@@ -55,5 +59,10 @@ class Parser
         $document = new DOMDocument;
         $document->loadHTML($html);
         return new DOMXpath($document);
+    }
+
+    private function isValidPhpInfoHtml()
+    {
+        return $this->xpath->query('//head//title')[0]->nodeValue === 'phpinfo()';
     }
 }

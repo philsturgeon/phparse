@@ -27,12 +27,12 @@ describe(Info::class, function() {
             it("returns major version of int(5)", function() {
                 expect($this->semver->getMajor())->toBe(5);
             });
-            
-            it("returns minor version of int(5)", function() {
+
+            it("returns minor version of int(6)", function() {
                 expect($this->semver->getMinor())->toBe(6);
             });
-            
-            it("returns patch version of int(5)", function() {
+
+            it("returns patch version of int(14)", function() {
                 expect($this->semver->getPatch())->toBe(14);
             });
         });

@@ -9,7 +9,7 @@ class Info
         $this->version = $version;
         $this->infoItems = $infoItems;
     }
-    
+
     public function phpVersion()
     {
         return $this->version;
@@ -17,6 +17,7 @@ class Info
 
     public function phpSemanticVersion()
     {
-        return SemVerParser::parse($this->version);
+        $noSuffix = (array) explode('-', $this->version);
+        return SemVerParser::parse($noSuffix[0]);
     }
 }
