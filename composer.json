@@ -1,6 +1,6 @@
 {
     "name": "sturgeon/phparse",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "require-dev": {
         "php-vcr/php-vcr": "~1.2",
         "crysalead/kahlan": "~1.2"
