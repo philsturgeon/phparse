@@ -14,7 +14,7 @@ describe(Parser::class, function() {
     });
 
     beforeEach(function() {
-        $url = 'http://localhost:8000/?version=5.6.12';
+        $url = 'http://localhost:8000/?version=7.0.11';
         $this->parser = Parser::readFromUrl($url);
     });
 

@@ -1,5 +1,5 @@
-<?php 
-use filter\Filter;
+<?php
+use kahlan\filter\Filter;
 use VCR\VCR;
 
 VCR::configure()->setCassettePath(__DIR__.'/spec/fixtures');
