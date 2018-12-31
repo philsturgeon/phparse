@@ -63,6 +63,6 @@ class Parser
 
     private function isValidPhpInfoHtml()
     {
-        return $this->xpath->query('//head//title')[0]->nodeValue === 'phpinfo()';
+        return strpos($this->xpath->query('//head//title')[0]->nodeValue, 'phpinfo()') !== false;
     }
 }
