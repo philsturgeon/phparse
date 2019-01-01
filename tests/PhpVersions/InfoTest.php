@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpVersions;
 
 use PHPUnit\Framework\TestCase;
