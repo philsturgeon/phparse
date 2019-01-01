@@ -1,21 +1,32 @@
-<?php namespace Sturgeon\PHPArse;
+<?php
+
+declare(strict_types=1);
+
+namespace PhpVersions\PHParse;
 
 use Naneau\SemVer\Parser as SemVerParser;
+use Naneau\SemVer\Version;
 
 class Info
 {
+    /** @var string */
+    private $version;
+
+    /** @var array */
+    private $infoItems;
+
     public function __construct(string $version, array $infoItems = [])
     {
         $this->version = $version;
         $this->infoItems = $infoItems;
     }
 
-    public function phpVersion()
+    public function phpVersion() : string
     {
         return $this->version;
     }
 
-    public function phpSemanticVersion()
+    public function phpSemanticVersion() : Version
     {
         return SemVerParser::parse(
             $this->normalizeSemVerSuffix(

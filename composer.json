@@ -1,16 +1,45 @@
 {
-    "name": "sturgeon/phparse",
+    "name": "phpversions/phparse",
     "version": "0.2.1",
     "require-dev": {
         "php-vcr/php-vcr": "~1.2",
-        "crysalead/kahlan": "~1.2"
+        "crysalead/kahlan": "~1.2",
+        "phpunit/phpunit": "^7.5",
+        "squizlabs/php_codesniffer": "^3.4",
+        "phpstan/phpstan": "^0.10.7"
     },
+    "authors": [
+        {
+            "name": "Phil Sturgeon",
+            "email": "phil@philsturgeon.co.uk"
+        },
+        {
+            "name": "Matt Trask",
+            "email": "mjftrask@gmail.com"
+        }
+    ],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Sturgeon\\PHPArse\\": "src"
+            "PhpVersions\\PHParse\\": "src"
         }
     },
     "require": {
-        "naneau/semver": "0.0.7.*"
+        "php": ">=7.2",
+        "naneau/semver": "0.0.7.*",
+        "monolog/monolog": "^1.24"
+    },
+    "scripts": {
+        "phpcs": "phpcs src tests --standard=psr2 -sp --colors",
+        "phpstan": [
+            "vendor/bin/phpstan analyse src --level max --no-progress",
+            "vendor/bin/phpstan analyse src --level 4 --no-progress"
+        ],
+        "phpunit": "phpunit --verbose --colors=always",
+        "test": [
+            "@phpstan",
+            "@phpunit",
+            "@phpcs"
+        ]
     }
 }

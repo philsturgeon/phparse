@@ -1,0 +1,31 @@
+language: php
+
+php:
+  - 7.2
+  - 7.3
+  - nightly
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: nightly
+
+sudo: false
+
+before_install:
+  - travis_retry composer self-update
+
+install:
+  - travis_retry composer require --no-update satooshi/php-coveralls:^1.0
+  - travis_retry composer install --no-interaction --prefer-dist
+
+before_script:
+  - mkdir -p build/logs
+
+script:
+  - composer run phpstan
+  - travis_wait ./vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/phpcs src tests --standard=psr2 -sp
+
+after_success:
+  - travis_retry php vendor/bin/coveralls
