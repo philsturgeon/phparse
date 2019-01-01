@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace PhpVersions\PHParse;
 
 use DOMDocument;
-use DOMXpath;
-use PhpVersions\PHParse\Exceptions\NoPhpVersionsFileException;
+use DOMXPath;
 
 class Parser
 {
@@ -66,11 +65,11 @@ class Parser
         return trim($label);
     }
 
-    private function loadXPathDocument($html) : DOMXpath
+    private function loadXPathDocument($html) : DOMXPath
     {
         $document = new DOMDocument;
         $document->loadHTML($html);
-        return new DOMXpath($document);
+        return new DOMXPath($document);
     }
 
     private function isValidPhpInfoHtml() : bool
