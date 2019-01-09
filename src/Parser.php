@@ -11,9 +11,6 @@ class Parser
 {
     protected $xpath;
 
-    /** @var string */
-    private $html;
-
     public static function readFromUrl($url)
     {
         $html = file_get_contents($url);
