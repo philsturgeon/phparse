@@ -5,7 +5,7 @@
         "crysalead/kahlan": "~1.2",
         "phpunit/phpunit": "^7.5",
         "squizlabs/php_codesniffer": "^3.4",
-        "phpstan/phpstan": "^0.10.7"
+        "phpstan/phpstan": "^0.10.8"
     },
     "authors": [
         {
@@ -32,7 +32,7 @@
         "phpcs": "phpcs src tests --standard=psr2 -sp --colors",
         "phpstan": [
             "vendor/bin/phpstan analyse src --level max --no-progress",
-            "vendor/bin/phpstan analyse src --level 4 --no-progress"
+            "vendor/bin/phpstan analyse src --level 7 --no-progress"
         ],
         "phpunit": "phpunit --verbose --colors=always",
         "test": [

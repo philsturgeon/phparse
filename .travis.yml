@@ -26,6 +26,7 @@ script:
   - composer run phpstan
   - travis_wait ./vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
   - ./vendor/bin/phpcs src tests --standard=psr2 -sp
+  - ./vendor/bin/phpstan analyse src --level=7
 
 after_success:
   - travis_retry php vendor/bin/coveralls
